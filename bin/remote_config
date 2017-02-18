@@ -1,6 +1,8 @@
 #!/bin/bash
+DIR="${PWD##*/}"
 terraform remote config \
     -backend=s3 \
-    -backend-config="bucket=terraform-state-prod" \
-    -backend-config="key=terraform_state/terraform.tfstate" \
-    -backend-config="region=us-east-2"
+    -backend-config="bucket=tfstate-alex" \
+    -backend-config="key=tf/$DIR/terraform.tfstate" \
+    -backend-config="region=us-east-1"
+
