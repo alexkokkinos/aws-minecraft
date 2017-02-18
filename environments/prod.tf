@@ -4,6 +4,6 @@ provider "aws" {
 
 module "prod" {
 	source = "../modules/server"
-	ami = "ami-0b33d91d"
+	ami = "ami-f0768de6"
 	instance_type = "t2.micro"
 }
