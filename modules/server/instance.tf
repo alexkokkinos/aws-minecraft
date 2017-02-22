@@ -36,7 +36,46 @@ resource "aws_iam_role" "minecraft" {
 EOF
 }
 
+resource "aws_iam_policy" "ecs" {
+  name = "minecraft_ecs_access"
+  path = "/"
+  decsription = "Minecraft ECS service access"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  Statement: [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:registerContainerInstance"
+        "ecs:DeregisterContainerInstance",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:Submit*",
+        "ecs:Poll",
+        "ecs:StartTask",
+        "ecs:StartTelemetrySession"
+      ]
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy_attachment" "ecs" {
+  name = "ecs_attachment"
+  role = ["${aws_iam_role.minecraft.id}"]
+  policy_arn = "aws_iam_policy.ecs.arn"
+}
+
 resource "aws_iam_instance_profile" "minecraft" {
 	name = "minecraft_profile"
 	roles = ["${aws_iam_role.minecraft.name}"]
+}
+
+output "instance_id" {
+  value = "aws_instance.minecraft_server.id"
+}
+
+output "iam_role_arn" {
+  value = "aws_iam_role.minecraft.arn"
 }

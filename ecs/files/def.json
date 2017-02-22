@@ -1,0 +1,12 @@
+[
+	{
+		"name": "minecraft",
+		"image": "itzg/minecraft-server",
+		"mountPoints": [
+			{
+				"containerPath": "/vanilla-data/",
+				"sourceVolume": "/data"
+			}
+		]
+	}
+]
