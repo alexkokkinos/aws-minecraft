@@ -38,7 +38,8 @@ resource "aws_iam_policy" "ecs" {
         "ecs:Submit*",
         "ecs:Poll",
         "ecs:StartTask",
-        "ecs:StartTelemetrySession"
+        "ecs:StartTelemetrySession",
+        "ecs:CreateCluster"
       ],
       "Resource": [
         "*"

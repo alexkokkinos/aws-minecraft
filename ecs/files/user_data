@@ -1,1 +1,3 @@
 #!/bin/bash
+yum install -y aws-cli
+echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config
