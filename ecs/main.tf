@@ -19,13 +19,15 @@ module "ecs_instance" {
 	source = "../modules/server"
 	ami = "ami-b2df2ca4"
 	instance_type = "t2.micro"
+	user_data = "${file("files/user_data")}"
+	fqdn = "vanilla.dnsname.click"
 }
 
 resource "aws_ecs_task_definition" "mc-task" {
 	family = "minecraft"
-	container_definitions = "${file.path("files/def.json")}"
+	container_definitions = "${file("files/def.json")}"
 	volume {
-		name = "/vanilla-data/"
-		host_path = "/data/"
+		name = "data"
+		host_path = "/vanilla-data/"
 	}
 }

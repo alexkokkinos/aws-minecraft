@@ -15,3 +15,12 @@ data "terraform_remote_state" "security_groups" {
 		region = "us-east-1"
 	}
 }
+
+data "terraform_remote_state" "iam_roles" {
+	backend = "s3"
+	config = {
+		bucket = "tfstate-alex"
+		key = "tf/iam_roles/terraform.tfstate"
+		region = "us-east-1"
+	}
+}
