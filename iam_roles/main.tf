@@ -50,10 +50,41 @@ resource "aws_iam_policy" "ecs" {
 EOF
 }
 
+resource "aws_iam_policy" "ecs_cloudwatch" {
+  name = "ecs_cloudwatch"
+  path = "/"
+  description = "CloudWatch logging for ECS"
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:*"
+            ]
+        }
+    ]
+}
+EOF
+}
+
 resource "aws_iam_policy_attachment" "ecs" {
   name = "ecs_attachment"
   roles = ["${aws_iam_role.minecraft.id}"]
   policy_arn = "${aws_iam_policy.ecs.arn}"
+}
+
+resource "aws_iam_policy_attachment" "ecs_cloudwatch" {
+  name = "ecs_cloudwatch_attachment"
+  roles = ["${aws_iam_role.minecraft.id}"]
+  policy_arn = "${aws_iam_policy.ecs_cloudwatch.arn}"
 }
 
 resource "aws_iam_instance_profile" "minecraft" {
