@@ -31,3 +31,10 @@ resource "aws_ecs_task_definition" "mc-task" {
 		host_path = "/vanilla-data/"
 	}
 }
+
+resource "aws_ecs_service" "minecraft" {
+  name = "mc-service"
+  cluster = "${aws_ecs_cluster.minecraft.id}"
+  task_definition = "${aws_ecs_task_definition.mc-task.arn}"
+  desired_count = 1
+}
