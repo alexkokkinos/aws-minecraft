@@ -3,6 +3,7 @@ yum install -y aws-cli git
 mkdir /vanilla-data
 mkdir /rcon
 echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config
-git clone https://github.com/alexkokkinos/aws-mc-scripts.git /usr/local/
-chmod u+x /usr/local/s3sync.sh
-(crontab -l ; echo "*/5 * * * * /usr/local/aws-mc-scripts/s3sync.sh") | crontab -
+git clone https://github.com/alexkokkinos/aws-mc-scripts.git /usr/local/aws-mc-scripts/
+chmod u+x /usr/local/aws-mc-scripts/s3sync.sh
+echo "*/5 * * * * /usr/local/aws-mc-scripts/s3sync.sh" >> cronfile
+crontab cronfile

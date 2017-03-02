@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "minecraft" {
-	name = "minecraft_role"
-	assume_role_policy = <<EOF
+  name = "minecraft_role"
+  assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -15,6 +15,40 @@ resource "aws_iam_role" "minecraft" {
       },
       "Effect": "Allow",
       "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "s3_saves" {
+  name = "s3_saves"
+  path = "/"
+  description = "Sync access for the worlds s3 bucket"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets"
+      ],
+      "Resource": [
+        "arn:aws:s3:::*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+          "s3:ListBucket",
+          "s3:PutObject",
+          "s3:DeleteObject"
+      ],
+      "Resource": [
+          "arn:aws:s3:::saves-alex",
+          "arn:aws:s3:::saves-alex/*"
+      ]
     }
   ]
 }
@@ -87,9 +121,15 @@ resource "aws_iam_policy_attachment" "ecs_cloudwatch" {
   policy_arn = "${aws_iam_policy.ecs_cloudwatch.arn}"
 }
 
+resource "aws_iam_policy_attachment" "s3_sync" {
+  name = "s3_sync_attachment"
+  roles = ["${aws_iam_role.minecraft.id}"]
+  policy_arn = "${aws_iam_policy.s3_saves.arn}"
+}
+
 resource "aws_iam_instance_profile" "minecraft" {
-	name = "minecraft"
-	roles = ["${aws_iam_role.minecraft.id}"]
+  name = "minecraft"
+  roles = ["${aws_iam_role.minecraft.id}"]
 }
 
 output "iam_role_arn" {
