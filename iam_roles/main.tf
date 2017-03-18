@@ -43,7 +43,8 @@ resource "aws_iam_policy" "s3_saves" {
       "Action": [
           "s3:ListBucket",
           "s3:PutObject",
-          "s3:DeleteObject"
+          "s3:DeleteObject",
+          "s3:GetObject"
       ],
       "Resource": [
           "arn:aws:s3:::saves-alex",

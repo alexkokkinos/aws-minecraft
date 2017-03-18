@@ -35,15 +35,6 @@ resource "aws_security_group_rule" "ssh_from_home" {
 	security_group_id = "${aws_security_group.minecraft.id}"
 }
 
-# resource "aws_security_group_rule" "all_from_home" {
-# 	from_port = 0
-# 	to_port = 65535
-# 	protocol = "tcp"
-# 	type = "ingress"
-# 	cidr_blocks = ["${var.home_ip}"]
-# 	security_group_id = "${aws_security_group.minecraft.id}"
-# }
-
 resource "aws_security_group_rule" "ingress_minecraft" {
 	from_port = 25565
 	to_port = 25565

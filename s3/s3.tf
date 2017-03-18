@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "terraform_state" {
 		enabled = true
 	}
 	lifecycle_rule {
-		id = "rule"
+		id = "old_version_expiration"
 		enabled = true
 		prefix = "/"
 		noncurrent_version_expiration {
@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "saves" {
 		enabled = true
 	}
 	lifecycle_rule {
-		id = "rule"
+		id = "old_version_expiration"
 		enabled = true
 		prefix = "/"
 		noncurrent_version_expiration {

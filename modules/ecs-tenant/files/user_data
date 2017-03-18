@@ -8,6 +8,6 @@ echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config
 git clone https://github.com/alexkokkinos/aws-mc-scripts.git /usr/local/aws-mc-scripts/
 git clone https://github.com/barneygale/MCRcon.git /usr/local/mcrcon/
 chmod u+x /usr/local/aws-mc-scripts/s3sync.sh
-aws s3 sync s3://saves-alex/vanilla-data/ /vanilla-data/
-echo "*/5 * * * * /usr/local/aws-mc-scripts/s3sync.sh" >> cronfile
+aws s3 cp s3://saves-alex/vanilla-data/ /vanilla-data/ --recursive
+echo "0 */12 * * * /usr/local/aws-mc-scripts/s3sync.sh" >> cronfile
 crontab cronfile
