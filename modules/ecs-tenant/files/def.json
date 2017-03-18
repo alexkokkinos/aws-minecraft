@@ -1,0 +1,162 @@
+[
+    {
+        "environment": [
+            {
+                "name": "EULA",
+                "value": "true"
+            },
+            {
+                "name": "CONSOLE",
+                "value": "false"
+            },
+            {
+                "name": "ENABLE_RCON",
+                "value": "true"
+            },
+            {
+                "name": "RCON_PASSWORD",
+                "value": "${RCON_PASSWORD}"
+            },
+            {
+                "name": "RCON_PORT",
+                "value": "${RCON_PORT}"
+            },
+            {
+				"Name": "MAX_MEMORY",
+				"Value": "${MAX_MEMORY}"
+			},
+            {
+                "Name": "TYPE",
+                "Value": "${TYPE}"
+            },
+                        {
+                "Name": "FTB_SERVER_MOD",
+                "Value": "${FTB_SERVER_MOD}"
+            },
+                        {
+                "Name": "MIN_RAM",
+                "Value": "${MIN_RAM}"
+            },
+                        {
+                "Name": "MAX_RAM",
+                "Value": "${MAX_RAM}"
+            },
+                        {
+                "Name": "PERMGEN_SIZE",
+                "Value": "${PERMGEN_SIZE}"
+            },
+            {
+                "Name": "DIFFICULTY",
+                "Value": "${DIFFICULTY}"
+            },
+            {
+                "Name": "WHITELIST",
+                "Value": "${WHITELIST}"
+            },
+            {
+                "Name": "OPS",
+                "Value": "${OPS}"
+            },
+            {
+                "Name": "ICON",
+                "Value": "${ICON}"
+            },
+            {
+                "Name": "ALLOW_NETHER",
+                "Value": "${ALLOW_NETHER}"
+            },
+            {
+                "Name": "FORCE_GAMEMODE",
+                "Value": "${FORCE_GAMEMODE}"
+            },
+            {
+                "Name": "ENABLE_COMMAND_BLOCK",
+                "Value": "${ENABLE_COMMAND_BLOCK}"
+            },
+            {
+                "Name": "GENERATE_STRUCTURES",
+                "Value": "${GENERATE_STRUCTURES}"
+            },
+            {
+                "Name": "MAX_BUILD_HEIGHT",
+                "Value": "${MAX_BUILD_HEIGHT}"
+            },
+            {
+                "Name": "HARDCORE",
+                "Value": "${HARDCORE}"
+            },
+            {
+                "Name": "MAX_TICK_TIME",
+                "Value": "${MAX_TICK_TIME}"
+            },
+            {
+                "Name": "SPAWN_ANIMALS",
+                "Value": "${SPAWN_ANIMALS}"
+            },
+            {
+                "Name": "SPAWN_MONSTERS",
+                "Value": "${SPAWN_MONSTERS}"
+            },
+            {
+                "Name": "SPAWN_NPCS",
+                "Value": "${SPAWN_NPCS}"
+            },
+            {
+                "Name": "VIEW_DISTANCE",
+                "Value": "${VIEW_DISTANCE}"
+            },
+            {
+                "Name": "SEED",
+                "Value": "${SEED}"
+            },
+            {
+                "Name": "MODE",
+                "Value": "${MODE}"
+            },
+            {
+                "Name": "MOTD",
+                "Value": "${MOTD}"
+            },
+            {
+                "Name": "PVP",
+                "Value": "${PVP}"
+            },
+            {
+                "Name": "LEVEL_TYPE",
+                "Value": "${LEVEL_TYPE}"
+            },
+            {
+                "Name": "LEVEL",
+                "Value": "${LEVEL}"
+            },
+            {
+                "Name": "WORLD",
+                "Value": "${WORLD}"
+            },
+            {
+                "Name": "MODPACK",
+                "Value": "${MODPACK}"
+            }
+        ],
+        "essential": true,
+        "image": "itzg/minecraft-server",
+        "memory": ${MAX_MEMORY_SERVER},
+        "mountPoints": [
+            {
+                "containerPath": "/data",
+                "sourceVolume": "data"
+            }
+        ],
+        "name": "minecraft",
+        "portMappings": [
+            {
+                "containerPort": ${MC_PORT},
+                "hostPort": ${MC_PORT}
+            },
+            {
+				"containerPort": ${RCON_PORT},
+                "hostPort": ${RCON_PORT}
+            }
+        ]
+    }
+]
