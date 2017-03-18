@@ -1,5 +1,7 @@
 #!/bin/bash
-yum install -y aws-cli git
+yum install -y aws-cli
+yum install -y nano
+yum install -y git
 mkdir /vanilla-data
 mkdir /rcon
 echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config

@@ -126,11 +126,11 @@ variable "whitelist" {
 	type = "string"
 }
 variable "world" {
-	default = ""
+	default = "world"
 	type = "string"
 }
 variable "max_memory" {
-	default = "800"
+	default = "800M"
 	type = "string"
 }
 variable "max_memory_server" {
