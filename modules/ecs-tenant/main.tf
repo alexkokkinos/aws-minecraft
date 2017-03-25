@@ -2,14 +2,6 @@ provider "aws" {
 	region = "us-east-1"
 }
 
-module "ecs_instance" {
-	source = "../server"
-	ami = "ami-b2df2ca4"
-	instance_type = "t2.micro"
-	user_data = "${file("../modules/ecs-tenant/files/user_data")}"
-	fqdn = "${var.fqdn}"
-}
-
 data "template_file" "task_definition_json" {
     template = "${file("../modules/ecs-tenant/files/def.json")}"
 
