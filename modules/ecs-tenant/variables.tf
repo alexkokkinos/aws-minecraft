@@ -4,7 +4,7 @@ variable "fqdn" {
 
 # This is not fully implemented - user_data needs to handle it somehow
 variable "data_location" {
-	default = "vanilla-data"
+	type = "string"
 }
 
 variable "environment_name" {

@@ -2,12 +2,9 @@
 yum install -y aws-cli
 yum install -y nano
 yum install -y git
-mkdir /vanilla-data
+yum install -y nfs-utils
+mkdir /efs
 mkdir /rcon
 echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config
-git clone https://github.com/alexkokkinos/aws-mc-scripts.git /usr/local/aws-mc-scripts/
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-971da8de.efs.us-east-1.amazonaws.com:/ /efs
 git clone https://github.com/barneygale/MCRcon.git /usr/local/mcrcon/
-chmod u+x /usr/local/aws-mc-scripts/s3sync.sh
-aws s3 cp s3://saves-alex/vanilla-data/ /vanilla-data/ --recursive
-echo "0 */12 * * * /usr/local/aws-mc-scripts/s3sync.sh" >> cronfile
-crontab cronfile
