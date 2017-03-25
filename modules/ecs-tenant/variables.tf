@@ -1,7 +1,3 @@
-variable "fqdn" {
-	type = "string"
-}
-
 # This is not fully implemented - user_data needs to handle it somehow
 variable "data_location" {
 	type = "string"

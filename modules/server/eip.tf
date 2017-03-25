@@ -14,3 +14,7 @@ resource "aws_route53_record" "minecraft" {
 	ttl = "300"
 	records = ["${aws_eip.minecraft.public_ip}"]
 }
+
+variable "fqdn" {
+	type = "string"
+}

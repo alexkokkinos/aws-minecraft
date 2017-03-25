@@ -17,7 +17,6 @@ module "ecs_instance" {
 module "server1" {
 	source = "../modules/ecs-tenant"
 	data_location = "efs/vanilla"
-	fqdn = "minecraft.dnsname.click"
 	environment_name = "prod"
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
