@@ -10,7 +10,7 @@ module "ecs_instance" {
 	source = "../modules/server"
 	ami = "ami-b2df2ca4"
 	instance_type = "t2.micro"
-	user_data = "${file("../modules/ecs-tenant/files/user_data")}"
+	user_data = "${file("./files/user_data")}"
 	fqdn = "${var.fqdn}"
 }
 

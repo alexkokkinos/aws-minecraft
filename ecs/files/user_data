@@ -6,5 +6,5 @@ yum install -y nfs-utils
 mkdir /efs
 mkdir /rcon
 echo ECS_CLUSTER=minecraft >> /etc/ecs/ecs.config
-mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-971da8de.efs.us-east-1.amazonaws.com:/ /efs
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 10.0.0.183:/ /efs
 git clone https://github.com/barneygale/MCRcon.git /usr/local/mcrcon/
