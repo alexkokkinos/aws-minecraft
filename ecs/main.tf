@@ -17,8 +17,19 @@ module "ecs_instance" {
 module "server1" {
 	source = "../modules/ecs-tenant"
 	data_location = "efs/vanilla"
-	environment_name = "prod"
+	environment_name = "proda"
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
 	ops = "${var.ops}"
+}
+
+module "server2" {
+	source = "../modules/ecs-tenant"
+	data_location = "efs/vanilla"
+	environment_name = "prodb"
+	whitelist = "${var.whitelist}"
+	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
+	ops = "${var.ops}"
+	mc_port = "25566"
+	rcon_port = "28017"
 }

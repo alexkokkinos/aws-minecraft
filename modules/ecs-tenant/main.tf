@@ -52,7 +52,7 @@ resource "aws_ecs_task_definition" "mc-task" {
 }
 
 resource "aws_ecs_service" "minecraft" {
-  name = "mc-service"
+  name = "{$var.environment_name}"
   cluster = "minecraft"
   task_definition = "${aws_ecs_task_definition.mc-task.arn}"
   desired_count = 1
