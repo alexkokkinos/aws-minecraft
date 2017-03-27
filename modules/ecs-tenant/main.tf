@@ -34,11 +34,14 @@ data "template_file" "task_definition_json" {
 		VIEW_DISTANCE = "${var.view_distance}"
 		WHITELIST = "${var.whitelist}"
 		WORLD = "${var.world}"
+		MEMORY = "${var.memory}"
         MAX_MEMORY = "${var.max_memory}"
         MAX_MEMORY_SERVER = "${var.max_memory_server}"
-        MC_PORT = "${var.mc_port}"
+        MC_HOST_PORT = "${var.mc_host_port}"
+        MC_CONTAINER_PORT = "${var.mc_container_port}"
         RCON_PASSWORD = "${var.rcon_password}"
-        RCON_PORT = "${var.rcon_port}"
+        RCON_HOST_PORT = "${var.rcon_host_port}"
+        RCON_CONTAINER_PORT = "${var.rcon_container_port}"
     }
 }
 
@@ -52,8 +55,8 @@ resource "aws_ecs_task_definition" "mc-task" {
 }
 
 resource "aws_ecs_service" "minecraft" {
-  name = "{$var.environment_name}"
+  name = "${var.environment_name}"
   cluster = "minecraft"
   task_definition = "${aws_ecs_task_definition.mc-task.arn}"
-  desired_count = 1
+  desired_count = "${var.desired_count}"
 }

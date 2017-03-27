@@ -42,8 +42,8 @@ resource "aws_security_group_rule" "ssh_from_home" {
 }
 
 resource "aws_security_group_rule" "ingress_minecraft" {
-	from_port = 25565
-	to_port = 25565
+	from_port = 32768
+	to_port = 60999
 	protocol = "tcp"
 	type = "ingress"
 	cidr_blocks = ["0.0.0.0/0"]

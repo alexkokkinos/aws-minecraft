@@ -19,7 +19,7 @@
             },
             {
                 "name": "RCON_PORT",
-                "value": "${RCON_PORT}"
+                "value": "${RCON_CONTAINER_PORT}"
             },
             {
 				"Name": "MAX_MEMORY",
@@ -29,19 +29,23 @@
                 "Name": "TYPE",
                 "Value": "${TYPE}"
             },
-                        {
+            {
                 "Name": "FTB_SERVER_MOD",
                 "Value": "${FTB_SERVER_MOD}"
             },
-                        {
+            {
+                "Name": "MEMORY",
+                "Value": "${MEMORY}"
+            },
+            {
                 "Name": "MIN_RAM",
                 "Value": "${MIN_RAM}"
             },
-                        {
+            {
                 "Name": "MAX_RAM",
                 "Value": "${MAX_RAM}"
             },
-                        {
+            {
                 "Name": "PERMGEN_SIZE",
                 "Value": "${PERMGEN_SIZE}"
             },
@@ -150,12 +154,12 @@
         "name": "minecraft",
         "portMappings": [
             {
-                "containerPort": ${MC_PORT},
-                "hostPort": ${MC_PORT}
+                "containerPort": ${MC_CONTAINER_PORT},
+                "hostPort": ${MC_HOST_PORT}
             },
             {
-				"containerPort": ${RCON_PORT},
-                "hostPort": ${RCON_PORT}
+				"containerPort": ${RCON_CONTAINER_PORT},
+                "hostPort": ${RCON_HOST_PORT}
             }
         ]
     }

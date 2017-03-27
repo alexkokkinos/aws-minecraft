@@ -11,6 +11,11 @@ variable "environment_name" {
 # 	type = "string"
 # }
 
+# Desired number of running tasks
+variable "desired_count" {
+	type = "string"
+}
+
 ######## MINECRAFT ENVIRONMENT VARIABLES
 
 variable "allow_nether" {
@@ -125,6 +130,10 @@ variable "world" {
 	default = "world"
 	type = "string"
 }
+variable "memory" {
+	default = "800M"
+	type = "string"
+}
 variable "max_memory" {
 	default = "800M"
 	type = "string"
@@ -133,12 +142,20 @@ variable "max_memory_server" {
 	default = "900"
 	type = "string"
 }
-variable "mc_port" {
+variable "mc_container_port" {
 	default = "25565"
 	type = "string"
 }
-variable "rcon_port" {
+variable "rcon_container_port" {
 	default = "28016"
+	type = "string"
+}
+variable "mc_host_port" {
+	default = "0"
+	type = "string"
+}
+variable "rcon_host_port" {
+	default = "0"
 	type = "string"
 }
 
