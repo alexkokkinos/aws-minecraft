@@ -2,6 +2,25 @@ provider "aws" {
 	region = "us-east-1"
 }
 
+resource "aws_ecs_cluster" "minecraft" {
+	name = "${var.environment_name}"
+}
+
+module "ecs_instance" {
+	source = "../server"
+	ami = "ami-b2df2ca4"
+	instance_type = "t2.micro"
+	user_data = "${data.template_file.user_data.rendered}"
+	fqdn = "${var.fqdn}"
+}
+
+data "template_file" "user_data" {
+	template = "${file("../modules/ecs-tenant/files/user_data")}"
+	vars {
+		cluster = "${var.environment_name}"
+	}
+}
+
 data "template_file" "task_definition_json" {
     template = "${file("../modules/ecs-tenant/files/def.json")}"
 
@@ -56,7 +75,7 @@ resource "aws_ecs_task_definition" "mc-task" {
 
 resource "aws_ecs_service" "minecraft" {
   name = "${var.environment_name}"
-  cluster = "minecraft"
+  cluster = "${var.environment_name}"
   task_definition = "${aws_ecs_task_definition.mc-task.arn}"
-  desired_count = "${var.desired_count}"
+  desired_count = 1
 }

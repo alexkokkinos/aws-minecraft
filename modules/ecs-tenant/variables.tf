@@ -11,8 +11,7 @@ variable "environment_name" {
 # 	type = "string"
 # }
 
-# Desired number of running tasks
-variable "desired_count" {
+variable "fqdn" {
 	type = "string"
 }
 
@@ -131,11 +130,11 @@ variable "world" {
 	type = "string"
 }
 variable "memory" {
-	default = "800M"
+	default = "750M"
 	type = "string"
 }
 variable "max_memory" {
-	default = "800M"
+	default = "750M"
 	type = "string"
 }
 variable "max_memory_server" {
@@ -151,11 +150,11 @@ variable "rcon_container_port" {
 	type = "string"
 }
 variable "mc_host_port" {
-	default = "0"
+	default = "25565"
 	type = "string"
 }
 variable "rcon_host_port" {
-	default = "0"
+	default = "28016"
 	type = "string"
 }
 

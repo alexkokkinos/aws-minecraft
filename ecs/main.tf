@@ -2,18 +2,6 @@ provider "aws" {
 	region = "us-east-1"
 }
 
-resource "aws_ecs_cluster" "minecraft" {
-	name = "minecraft"
-}
-
-module "ecs_instance" {
-	source = "../modules/server"
-	ami = "ami-b2df2ca4"
-	instance_type = "t2.small"
-	user_data = "${file("./files/user_data")}"
-	fqdn = "${var.fqdn}"
-}
-
 module "server1" {
 	source = "../modules/ecs-tenant"
 	data_location = "efs/sever1"
@@ -21,7 +9,8 @@ module "server1" {
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
 	ops = "${var.ops}"
-	desired_count = 1
+	fqdn = "server1.dnsname.click"
+	motd = "server1!"
 }
 
 module "server2" {
@@ -31,5 +20,6 @@ module "server2" {
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
 	ops = "${var.ops}"
-	desired_count = 1
+	fqdn = "server2.dnsname.click"
+	motd = "server2!"
 }
