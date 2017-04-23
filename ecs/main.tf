@@ -4,7 +4,7 @@ provider "aws" {
 
 module "server1" {
 	source = "../modules/ecs-tenant"
-	data_location = "efs/sever1"
+	data_location = "efs/server1"
 	environment_name = "server-1"
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB

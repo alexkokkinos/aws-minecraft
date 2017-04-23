@@ -25,8 +25,12 @@ resource "aws_db_instance" "default" {
   name                 = "chunk"
   username             = "superuser"
   password             = "${var.db_password}"
+  backup_window = "04:00-06:00"
+  maintenance_window = "sun:07:00-sun:08:00"
+  backup_retention_period = 14
+  auto_minor_version_upgrade = true
   db_subnet_group_name = "${aws_db_subnet_group.rds.id}"
-  vpc_security_group_ids = ["${data.terraform_remote_state.security_groups.sg_minecraft}"]
+  vpc_security_group_ids = ["${data.terraform_remote_state.security_groups.sg_rds}"]
   multi_az = true
 }
 

@@ -23,6 +23,21 @@ resource "aws_security_group" "efs" {
 	vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
 }
 
+resource "aws_security_group" "rds" {
+	name = "RDS"
+	description = "Allows RDS access from web system"
+	vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
+}
+
+resource "aws_security_group_rule" "ingress_rds" {
+	from_port = 5432
+	to_port = 5432
+	protocol = "-1"
+	type = "ingress"
+	source_security_group_id = "${aws_security_group.minecraft.id}"
+	security_group_id = "${aws_security_group.rds.id}"
+}
+
 resource "aws_security_group_rule" "egress_all" {
 	from_port = 0
 	to_port = 65535
@@ -30,6 +45,15 @@ resource "aws_security_group_rule" "egress_all" {
 	type = "egress"
 	cidr_blocks = ["0.0.0.0/0"]
 	security_group_id = "${aws_security_group.minecraft.id}"
+}
+
+resource "aws_security_group_rule" "egress_all_2" {
+	from_port = 0
+	to_port = 65535
+	protocol = "-1"
+	type = "egress"
+	cidr_blocks = ["0.0.0.0/0"]
+	security_group_id = "${aws_security_group.rds.id}"
 }
 
 resource "aws_security_group_rule" "ssh_from_home" {
@@ -92,4 +116,8 @@ output "sg_minecraft" {
 
 output "sg_efs_mount_target" {
 	value = "${aws_security_group.efs.id}"
+}
+
+output "sg_rds" {
+	value = "${aws_security_group.rds.id}"
 }
