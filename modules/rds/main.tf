@@ -20,18 +20,24 @@ resource "aws_db_instance" "default" {
   allocated_storage    = 10
   storage_type         = "gp2"
   engine               = "postgres"
-  engine_version       = "9.6.2"
+  engine_version       = "9.6"
   instance_class       = "db.t2.micro"
   name                 = "chunk"
   username             = "superuser"
   password             = "${var.db_password}"
-  db_subnet_group_name = "${data.terraform_remote_state.vpc.subnet_public1a_id}"
+  db_subnet_group_name = "${aws_db_subnet_group.rds.id}"
   vpc_security_group_ids = ["${data.terraform_remote_state.security_groups.sg_minecraft}"]
-  storage_encrypted = true
-  kms_key_id = "${aws_kms_key.rds.arn}"
+  multi_az = true
 }
 
-resource "aws_kms_key" "rds" {
-	description = "Key for RDS"
-	enable_key_rotation = true
+resource "aws_db_subnet_group" "rds" {
+	name = "main"
+	subnet_ids = [
+	"${data.terraform_remote_state.vpc.subnet_private1_id}",
+	"${data.terraform_remote_state.vpc.subnet_private2_id}",
+	]
+
+	tags {
+		Name = "chunk subnet group"
+	}
 }
