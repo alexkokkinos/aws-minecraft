@@ -9,17 +9,6 @@ module "server1" {
 	whitelist = "${var.whitelist}"
 	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
 	ops = "${var.ops}"
-	fqdn = "server1.dnsname.click"
+	fqdn = "${var.fqdn}"
 	motd = "server1!"
-}
-
-module "server2" {
-	source = "../modules/ecs-tenant"
-	data_location = "efs/server2"
-	environment_name = "server-2"
-	whitelist = "${var.whitelist}"
-	type = "VANILLA" # VANILLA, FORGE, SPIGOT, BUKKIT, PAPER, FTB
-	ops = "${var.ops}"
-	fqdn = "server2.dnsname.click"
-	motd = "server2!"
 }

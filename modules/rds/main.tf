@@ -32,6 +32,7 @@ resource "aws_db_instance" "default" {
   db_subnet_group_name = "${aws_db_subnet_group.rds.id}"
   vpc_security_group_ids = ["${data.terraform_remote_state.security_groups.sg_rds}"]
   multi_az = true
+  publicly_accessible = true
 }
 
 resource "aws_db_subnet_group" "rds" {

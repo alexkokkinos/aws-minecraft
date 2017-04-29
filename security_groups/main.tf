@@ -32,7 +32,7 @@ resource "aws_security_group" "rds" {
 resource "aws_security_group_rule" "ingress_rds" {
 	from_port = 5432
 	to_port = 5432
-	protocol = "-1"
+	protocol = "tcp"
 	type = "ingress"
 	source_security_group_id = "${aws_security_group.minecraft.id}"
 	security_group_id = "${aws_security_group.rds.id}"
