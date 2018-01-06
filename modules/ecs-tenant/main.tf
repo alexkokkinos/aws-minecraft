@@ -12,6 +12,7 @@ module "ecs_instance" {
 	instance_type = "t2.micro"
 	user_data = "${data.template_file.user_data.rendered}"
 	fqdn = "${var.fqdn}"
+	tag_name = "ecs instance"
 }
 
 data "template_file" "user_data" {

@@ -11,6 +11,10 @@ variable "user_data" {
   default = ""
 }
 
+variable "tag_name" {
+  type = "string"
+}
+
 resource "aws_instance" "minecraft_server" {
     ami = "${var.ami}"
     instance_type = "${var.instance_type}"
@@ -21,6 +25,9 @@ resource "aws_instance" "minecraft_server" {
     iam_instance_profile = "${data.terraform_remote_state.iam_roles.instance_profile}"
     key_name = "mc-key"
     user_data = "${var.user_data}"
+    tags {
+      Name = "${var.tag_name}"
+    }
 }
 
 output "instance_id" {
